@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Random Dot</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .canvas {
+        width: 100%;
+        height: 500px;
+        background-color: #254085;
+    }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+    jQuery(document).ready(function($) {
+        var canvas = document.querySelector('.canvas');
+        var c_width = canvas.offsetWidth; //畫布寬
+        var c_height = canvas.offsetHeight; //畫布高
+        var r = 3; //圓點半徑
+        var r_prob = 0.6; //圓大小變動
+        var dot_num = 200; //圓點數量
+        var x_pos, y_pos, r_ch; //圓點xy位置 大小變化率
+        function getRandomNumber(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function drawDot(i, x_pos, y_pos, r_ch) {
+            var r_width = r_ch * 2;
+            var r_height = r_ch * 2;
+            var r_radius = r_ch;
+            $('.canvas').append('<div class="dot' + i + '"></div>');
+            $('.dot' + i).css({
+                'width': r_width + 'px',
+                'height': r_height + 'px',
+                'border-radius': r_radius + 'px',
+                'left': x_pos + 'px',
+                'top': y_pos + 'px',
+                'background-color': '#ccb67c',
+                'position': 'absolute'
+            });
+        }
+        for (var i = 0; i < dot_num; i++) {
+            x_pos = getRandomNumber(0, c_width);
+            y_pos = getRandomNumber(0, c_height);
+            r_ch = getRandomNumber(r_prob, 1) * r; //圓改變的半徑
+            drawDot(i, x_pos, y_pos, r_ch);
+        }
+    });
+    </script>
+</head>
+
+<body>
+    <div class="canvas">
+    </div>
+</body>
+
+</html>
